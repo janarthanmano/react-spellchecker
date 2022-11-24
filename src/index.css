@@ -7,7 +7,42 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+p u{
+  text-decoration: underline;
+  text-decoration-color: red;
+}
+
+.d-none{
+  display: none;
+}
+
+.tool_tip{
+  position: absolute;
+  width: 500px;
+  z-index: 10000;
+}
+
+.tool_tip ul{
+  list-style: none;
+  background: #eee;
+  border: 1px solid #008575;
+  width: 30%;
+  margin: 0px;
+  padding: 0px;
+}
+
+.tool_tip ul.suggestions li{
+  padding-left: 5px;
+}
+
+.tool_tip ul li{
+  cursor: pointer;
+}
+
+.tool_tip ul li:hover{
+  background: #ddd;
+}
+
+.tool_tip ul i{
+  margin-right: 10px;
 }
