@@ -13,7 +13,7 @@ import './app.js';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 const doneTypingInterval = 1000;
-let checking;
+let checkingFr, checkingIt, checkingEnGb;
 
 /*
  * Simple editor component that takes placeholder text as a prop
@@ -53,10 +53,11 @@ class Editor extends React.Component {
      * Handle for french editor
      */
     handleChangeFr (html, delta, source) {
-        clearTimeout(checking);
+        console.log(source);
+        clearTimeout(checkingFr);
         if(source === 'user'){
             this.setState({ frHtml: html });
-            checking = setTimeout(this.spellCheck, doneTypingInterval, html, 'fr');
+            checkingFr = setTimeout(this.spellCheck, doneTypingInterval, html, 'fr');
         }
     }
 
@@ -64,10 +65,11 @@ class Editor extends React.Component {
      * Handle for italian editor
      */
     handleChangeIt (html, delta, source) {
-        clearTimeout(checking);
+        console.log(source);
+        clearTimeout(checkingIt);
         if(source === 'user'){
             this.setState({ itHtml: html });
-            checking = setTimeout(this.spellCheck, doneTypingInterval, html, 'it');
+            checkingIt = setTimeout(this.spellCheck, doneTypingInterval, html, 'it');
         }
     }
 
@@ -75,49 +77,53 @@ class Editor extends React.Component {
      * Handle for english GB editor
      */
     handleChangeEnGb (html, delta, source) {
-        clearTimeout(checking);
+        console.log(source);
+        clearTimeout(checkingEnGb);
         if(source === 'user'){
             this.setState({ enGbHtml: html });
-            checking = setTimeout(this.spellCheck, doneTypingInterval, html, 'en-gb');
+            checkingEnGb = setTimeout(this.spellCheck, doneTypingInterval, html, 'en-gb');
         }
     }
 
     render () {
         return (
             <div style={{ width: 500, margin: '5% auto' }}>
-                <ReactQuill
-                    theme={this.state.theme}
-                    onChange={this.handleChangeFr}
-                    value={this.state.frHtml}
-                    modules={Editor.modules}
-                    formats={Editor.formats}
-                    bounds={'.app'}
-                    placeholder={this.props.fr}
-                    style={{margin : '0px 0px 60px 0px', height : 100}}
-                />
-                <div id={"f_tool"}></div>
-                <ReactQuill
-                    theme={this.state.theme}
-                    onChange={this.handleChangeIt}
-                    value={this.state.itHtml}
-                    modules={Editor.modules}
-                    formats={Editor.formats}
-                    bounds={'.app'}
-                    placeholder={this.props.it}
-                    style={{margin : '0px 0px 60px 0px', height : 100}}
-                />
-                <div id={"i_tool"}></div>
-                <ReactQuill
-                    theme={this.state.theme}
-                    onChange={this.handleChangeEnGb}
-                    value={this.state.enGbHtml}
-                    modules={Editor.modules}
-                    formats={Editor.formats}
-                    bounds={'.app'}
-                    placeholder={this.props.en_gb}
-                    style={{margin : '0px 0px 60px 0px', height : 100}}
-                />
-                <div id={"engb_tool"}></div>
+                <div id={"f_editor_container"}>
+                    <ReactQuill
+                        theme={this.state.theme}
+                        onChange={this.handleChangeFr}
+                        value={this.state.frHtml}
+                        modules={Editor.modules}
+                        formats={Editor.formats}
+                        placeholder={this.props.fr}
+                        style={{margin : '0px 0px 60px 0px', height : 100}}
+                    />
+                    <div id={"f_tool"}></div>
+                </div>
+                <div id={"i_editor_container"}>
+                    <ReactQuill
+                        theme={this.state.theme}
+                        onChange={this.handleChangeIt}
+                        value={this.state.itHtml}
+                        modules={Editor.modules}
+                        formats={Editor.formats}
+                        placeholder={this.props.it}
+                        style={{margin : '0px 0px 60px 0px', height : 100}}
+                    />
+                    <div id={"i_tool"}></div>
+                </div>
+                <div id={"engb_editor_container"}>
+                    <ReactQuill
+                        theme={this.state.theme}
+                        onChange={this.handleChangeEnGb}
+                        value={this.state.enGbHtml}
+                        modules={Editor.modules}
+                        formats={Editor.formats}
+                        placeholder={this.props.en_gb}
+                        style={{margin : '0px 0px 60px 0px', height : 100}}
+                    />
+                    <div id={"engb_tool"}></div>
+                </div>
             </div>
         )
     }
